@@ -207,9 +207,7 @@ int main(int, char**)
             usercol=autoplayer(grid, numrows, numcols, 3)+1;
             row=addtocolumn(grid,usercol-1,numrows,player);
             
-        }
-
-        if (usercol!=-1 && player==1 && validcolumn(numrows,numcols,grid,usercol)){
+        } else if (usercol!=-1 && player==1 && validcolumn(numrows,numcols,grid,usercol)){
             row=addtocolumn(grid,usercol-1,numrows,player);
 
                 
@@ -231,8 +229,19 @@ int main(int, char**)
 
         
         
-        }
         }ImGui::End();
+        }  else {
+            if (ImGui::Begin("Gave over",NULL,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar)){
+                for (int column=0;column<7;column++){
+                    for (int row=0;row<6;row++){
+                        DrawCell(row,column,grid[row][column]);
+                    }
+                }
+                ImGui::SetWindowFontScale(2.1);
+                ImGui::SetCursorPos(ImVec2(960,950));
+                ImGui::Text("GAVE OVER");
+            }ImGui::End();
+        }
 
         
 
