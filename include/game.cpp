@@ -3,7 +3,7 @@
 using namespace std;
 
 
-int usercol;
+
 
 
 void printGrid(int grid[6][7],int numrows, int numcols) { 

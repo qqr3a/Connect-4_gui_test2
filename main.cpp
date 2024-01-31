@@ -55,6 +55,19 @@ void DrawCell(int x, int y, int player) {
 
 
 
+bool done;
+
+const int numrows=6;
+const int numcols=7;
+int grid[numrows][numcols] = {{0}};
+
+int player, usercol;
+
+int numempty;
+bool start=true;
+bool winner=false;
+
+
 
 int main(int, char**)
 {
@@ -91,18 +104,7 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.47f, 0.49f, 0.509f,0.9f);
 
     // Main loop
-    bool done = false;
-
-    const int numrows=6;
-    const int numcols=7;
-    int grid[numrows][numcols] = {{0}};
-
-    int player=1,usercol;
-
-    int numempty=42;
-    int firstmove=true;
-
-    bool winner=false,buttonhadbeenpressed;
+    
     
     int column,row;
     while (!done){   
@@ -136,12 +138,26 @@ int main(int, char**)
         ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size);
         ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos);
 
-        
+        if (start==true){
+            if (ImGui::Begin("Connect4",NULL,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar)){
+                ImGui::SetCursorPos(ImVec2(710,510));
 
-        
-        if (winner==false){
+                if (ImGui::Button("Start",ImVec2(500,100))){
+                    start = false;
+                    done = false;
+                    for (int column=0;column<7;column++){
+                        for (int row=0;row<6;row++){
 
-        
+                            grid[row][column] = 0;
+                        }
+                    }
+                    numempty=42;
+                    player = 1;
+                    winner = false;
+                }
+            }ImGui::End();
+
+        } else if (winner==false && numempty>0){
             if (ImGui::Begin("Connect4",NULL,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar)){
                 usercol= -1;
                 
@@ -157,6 +173,8 @@ int main(int, char**)
             buttonposx=488;
             buttonposy=1080-100-buttonhight;
 
+            ImGui::SetWindowFontScale(1.5);
+            
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
             if (ImGui::Button("1",ImVec2(buttonwidth,buttonhight))){
@@ -201,8 +219,7 @@ int main(int, char**)
         
         
 
-        
-        
+                
         if (player==2){
             usercol=autoplayer(grid, numrows, numcols, 3)+1;
             row=addtocolumn(grid,usercol-1,numrows,player);
@@ -212,16 +229,13 @@ int main(int, char**)
 
                 
         }
-        
+
+
         if (usercol>=0){
             winner=fourinaline(grid, row, usercol-1, player,numrows,numcols);
 
             numempty-=1;
-            if (player==1){
-                player=2;
-            } else{
-                player=1;
-            }
+            if (player==1) {player=2;} else {player=1;}
 
             printGrid(grid,numrows,numcols);
         }
@@ -238,9 +252,14 @@ int main(int, char**)
                     }
                 }
                 ImGui::SetWindowFontScale(2.1);
-                ImGui::SetCursorPos(ImVec2(960,950));
-                ImGui::Text("GAVE OVER");
+                ImGui::SetCursorPos(ImVec2(735,925));
+
+                if (ImGui::Button("Play again",ImVec2(450,70))){
+                    start=true;
+                }
+                
             }ImGui::End();
+
         }
 
         

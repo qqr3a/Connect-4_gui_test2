@@ -22,15 +22,21 @@ bool botfourinaline(int grid[6][7], int row_test, int column, int player, int nu
         for (int step=-3;step<3;step++){
             int current_row = row_test + dir[0] * step;
             int current_col = column + dir[1] * step;
-            if (0 <= current_row && current_row < numrows && 0 <= current_col < numcols){
-                if (grid[current_row][current_col] == player){
-                count += 1;
-                if (count == 4){
-                    return true;}
-                } else {
-                count=0;}
-            } else{
-                count=0;}
+            if (0 > current_row || current_row >= numrows && 0 > current_col || current_col >= numcols){
+                count=0;
+                continue;
+            }
+
+            if (grid[current_row][current_col] != player){
+              count=0;
+              continue;
+            }
+
+
+            count += 1;
+            if (count == 4){
+                return true;
+            }   
         }
     }
     return false;
@@ -103,20 +109,20 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
   while (true){
     input=0;
     while (input==0){
-      input=rand()%numrows;
+      input=rand()%numcols;
     }
     
-    if (grid[numrows-1][input-1]==0 && donotpick[input-1]==0){
+    if (grid[numrows-1][input]==0 && donotpick[input-1]==0){
       return input-1;
     }
       
     only=true;
     for (int i=0;i<numcols;i++){
-      if (grid[numrows-1][input-1]==0 && donotpick[i]==0){
+      if (grid[numrows-1][input]==0 && donotpick[i]==0){
         only=false;
       }
     }
-    if (only){
+    if (only && grid[numrows-1][input]==0){
       return input-1;
     }
   }
