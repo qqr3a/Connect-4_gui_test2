@@ -101,7 +101,7 @@ int main(int, char**)
     style.Colors[ImGuiCol_WindowBg] = ImVec4(0,0,0,0);
     style.WindowRounding = 0;
 
-    ImVec4 clear_color = ImVec4(0.47f, 0.49f, 0.509f,0.9f);
+    ImVec4 clear_color = ImVec4(0.12f, 0.12f, 0.12f,0.9f);
 
     // Main loop
     
