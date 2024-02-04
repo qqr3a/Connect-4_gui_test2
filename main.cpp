@@ -29,11 +29,30 @@ int buttonposy;
         
 
 
-void DrawCell(int x, int y, int player) {
-    const int gridOffsetX = 488;
-    const int gridOffsetY = 100;
-    const int cellSize = 135;
 
+const int gridOffsetX = 488;
+const int gridOffsetY = 100;
+const int cellSize = 135;
+
+bool done;
+
+const int numrows=6;
+const int numcols=7;
+
+int grid[numrows][numcols] = {{0}};
+
+int player, usercol;
+
+int numempty;
+bool start=true;
+bool winner=false;
+
+
+
+
+
+void DrawCell(int x , int y , int player) {
+    
     ImVec2 top_left = ImVec2(y * cellSize + gridOffsetX, (6 - 1 - x) * cellSize + gridOffsetY);
     ImVec2 bottom_right = ImVec2((y + 1) * cellSize + gridOffsetX, (6 - x) * cellSize + gridOffsetY);
     
@@ -55,17 +74,7 @@ void DrawCell(int x, int y, int player) {
 
 
 
-bool done;
 
-const int numrows=6;
-const int numcols=7;
-int grid[numrows][numcols] = {{0}};
-
-int player, usercol;
-
-int numempty;
-bool start=true;
-bool winner=false;
 
 
 
@@ -294,6 +303,10 @@ int main(int, char**)
 
     return 0;
 }
+
+
+
+
 
 
 
