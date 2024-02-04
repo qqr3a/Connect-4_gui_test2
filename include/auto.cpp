@@ -112,7 +112,7 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
       input=rand()%numcols;
     }
     
-    if (grid[numrows-1][input]==0 && donotpick[input-1]==0){
+    if (grid[numrows-1][input]==0 && donotpick[input]==0){
       return input-1;
     }
       
