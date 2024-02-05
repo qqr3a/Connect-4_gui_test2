@@ -65,7 +65,7 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
               cout<<"WOOPS"<<endl;
             } else{
               grid[auto_row][col] = 0;
-              cout<<"WIN FOUND"<<endl;
+              cout<<"WIN FOUND "<<col<<endl;
               return col;
             }
           }
@@ -107,22 +107,21 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
     }
   }
   while (true){
-    input=0;
-    while (input==0){
-      input=rand()%numcols;
-    }
+    input=randwithrange(numcols+1);
     
     if (grid[numrows-1][input]==0 && donotpick[input]==0){
+      cout<<"hello"<<donotpick[input]<<endl;
       return input-1;
     }
       
     only=true;
     for (int i=0;i<numcols;i++){
-      if (grid[numrows-1][input]==0 && donotpick[i]==0){
+      if (grid[numrows-1][i]==0 && donotpick[i]==0){
         only=false;
       }
     }
     if (only && grid[numrows-1][input]==0){
+      cout<<"oui"<<endl;
       return input-1;
     }
   }

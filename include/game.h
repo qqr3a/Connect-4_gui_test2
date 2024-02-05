@@ -1,5 +1,5 @@
 
-void printGrid(int grid[6][7],int numrows, int numcols);
+void printGrid(int grid[6][7],int numrows, int numcols , int remaining);
 
 bool fourinaline(int grid[6][7], int row, int column, int player, int numrows, int numcols);
 

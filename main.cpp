@@ -43,7 +43,7 @@ int grid[numrows][numcols] = {{0}};
 
 int player, usercol;
 
-int numempty;
+int numtogo;
 bool start=true;
 bool winner=false;
 
@@ -110,7 +110,7 @@ int main(int, char**)
     style.Colors[ImGuiCol_WindowBg] = ImVec4(0,0,0,0);
     style.WindowRounding = 0;
 
-    ImVec4 clear_color = ImVec4(0.12f, 0.12f, 0.12f,0.9f);
+    ImVec4 clear_color = ImVec4(0.27f , 0.27f , 0.27f , 1);
 
     // Main loop
     
@@ -160,13 +160,13 @@ int main(int, char**)
                             grid[row][column] = 0;
                         }
                     }
-                    numempty=42;
+                    numtogo=0;
                     player = 1;
                     winner = false;
                 }
             }ImGui::End();
 
-        } else if (winner==false && numempty>0){
+        } else if (winner==false && numtogo<=42){
             if (ImGui::Begin("Connect4",NULL,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar)){
                 usercol= -1;
                 
@@ -233,6 +233,7 @@ int main(int, char**)
             usercol=autoplayer(grid, numrows, numcols, 3)+1;
             row=addtocolumn(grid,usercol-1,numrows,player);
             
+            
         } else if (usercol!=-1 && player==1 && validcolumn(numrows,numcols,grid,usercol)){
             row=addtocolumn(grid,usercol-1,numrows,player);
 
@@ -243,10 +244,9 @@ int main(int, char**)
         if (usercol>=0){
             winner=fourinaline(grid, row, usercol-1, player,numrows,numcols);
 
-            numempty-=1;
-            if (player==1) {player=2;} else {player=1;}
+            numtogo++;
+            if (player==1) {player=2;} else {player=1;printGrid(grid,numrows,numcols,numtogo/2);}
 
-            printGrid(grid,numrows,numcols);
         }
                 
 

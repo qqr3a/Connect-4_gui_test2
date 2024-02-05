@@ -6,7 +6,8 @@ using namespace std;
 
 
 
-void printGrid(int grid[6][7],int numrows, int numcols) { 
+void printGrid(int grid[6][7],int numrows, int numcols , int remaining) { 
+    cout << remaining << endl;
     for (int i = numrows - 1; i >= 0; --i) {
         for (int j = 0; j < numcols; ++j) {
             cout << grid[i][j] << " ";
@@ -57,9 +58,9 @@ bool validcolumn(int numrows,int numcols,int grid[6][7],int usercol){
         if (grid[numrows-1][usercol-1]==0){
             return true;
         }else{  
-            system("cls");printGrid(grid,numrows,numcols);cout<<"Column is full\n";}
+            cout<<"Column is full\n";}
     }else{
-    system("cls");printGrid(grid,numrows,numcols);cout<<"Column number out of range\n";}
+    cout<<"Column number out of range\n";}
     return false;
 }
     
