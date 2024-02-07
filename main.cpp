@@ -62,10 +62,10 @@ void DrawCell(int x , int y , int player) {
         const ImU32 colour_int = ImColor(ImVec4(0.5, 0.5, 0.5, 1.0));
         draw->AddRect(top_left, bottom_right, colour_int);
     } else if (player == 1) {
-        const ImU32 colour_int = ImColor(ImVec4(0.6, 0.3, 0.3, 1.0));
+        const ImU32 colour_int = ImColor(ImVec4(0.7, 0.3, 0.3, 1.0));
         draw->AddRectFilled(top_left, bottom_right, colour_int);
     } else if (player == 2) {
-        const ImU32 colour_int = ImColor(ImVec4(0.3, 0.3, 0.6, 1.0));
+        const ImU32 colour_int = ImColor(ImVec4(0.3, 0.3, 0.7, 1.0));
         draw->AddRectFilled(top_left, bottom_right, colour_int);
     }
 }
@@ -110,7 +110,7 @@ int main(int, char**)
     style.Colors[ImGuiCol_WindowBg] = ImVec4(0,0,0,0);
     style.WindowRounding = 0;
 
-    ImVec4 clear_color = ImVec4(0.27f , 0.27f , 0.27f , 1);
+    ImVec4 clear_color = ImVec4(0.40f , 0.40f , 0.42f , 1);
 
     // Main loop
     
@@ -234,10 +234,12 @@ int main(int, char**)
             row=addtocolumn(grid,usercol-1,numrows,player);
             
             
-        } else if (usercol!=-1 && player==1 && validcolumn(numrows,numcols,grid,usercol)){
+        } else if (usercol!=-1 && validcolumn(numrows,numcols,grid,usercol)){
             row=addtocolumn(grid,usercol-1,numrows,player);
 
                 
+        } else {
+            usercol=-1;
         }
 
 

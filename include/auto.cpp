@@ -110,8 +110,8 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
     input=randwithrange(numcols+1);
     
     if (grid[numrows-1][input]==0 && donotpick[input]==0){
-      cout<<"hello"<<donotpick[input]<<endl;
-      return input-1;
+      cout<<"hello "<<donotpick[input]<<endl;
+      return input;
     }
       
     only=true;
@@ -122,7 +122,7 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
     }
     if (only && grid[numrows-1][input]==0){
       cout<<"oui"<<endl;
-      return input-1;
+      return input;
     }
   }
 }
