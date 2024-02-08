@@ -1,20 +1,20 @@
 #include <iostream>
 
-using namespace std;
 
 
 
 
 
-void printGrid(int grid[6][7],int numrows, int numcols , int remaining) { 
-    cout << remaining << endl;
+
+void printGrid(int grid[6][7],int numrows, int numcols , int round) { 
+    std::cout << "Round " << round << std::endl;
     for (int i = numrows - 1; i >= 0; --i) {
         for (int j = 0; j < numcols; ++j) {
-            cout << grid[i][j] << " ";
+            std::cout << grid[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 bool fourinaline(int grid[6][7], int row, int column, int player, int numrows, int numcols){
@@ -58,9 +58,11 @@ bool validcolumn(int numrows,int numcols,int grid[6][7],int usercol){
         if (grid[numrows-1][usercol-1]==0){
             return true;
         }else{  
-            cout<<"Column is full\n";}
+            std::cout<<"Column is full\n";
+        }
     }else{
-    cout<<"Column number out of range\n";}
+        std::cout<<"Column number out of range\n";
+    }
     return false;
 }
     

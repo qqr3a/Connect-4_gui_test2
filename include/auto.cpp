@@ -10,8 +10,8 @@ int temp;
 int chosenrandom;
 
 int randwithrange(int rangemax){
-  srand((unsigned) time(NULL));
-  return rand()%rangemax;
+    srand((unsigned) time(NULL));
+    return rand()%rangemax;
 }
 
 
@@ -40,6 +40,16 @@ bool botfourinaline(int grid[6][7], int row_test, int column, int player, int nu
         }
     }
     return false;
+}
+
+
+bool isFreeColumns(int numcols , int numrows, int grid[6][7] , int donotpick[7]){
+    for (int i=0;i<numcols;i++){
+        if (grid[numrows-1][i]==0 && donotpick[i]==0){
+            return false;
+        }
+    }
+    return true;
 }
 
 int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
@@ -110,18 +120,13 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
     input=randwithrange(numcols+1);
     
     if (grid[numrows-1][input]==0 && donotpick[input]==0){
-      cout<<"hello "<<donotpick[input]<<endl;
+      cout<<"Bot input column: "<<input+1<<", do not pick is: "<<donotpick[input]<<endl;
       return input;
     }
       
-    only=true;
-    for (int i=0;i<numcols;i++){
-      if (grid[numrows-1][i]==0 && donotpick[i]==0){
-        only=false;
-      }
-    }
-    if (only && grid[numrows-1][input]==0){
-      cout<<"oui"<<endl;
+    
+    if (isFreeColumns(numcols , numrows , grid , donotpick) && grid[numrows-1][input]==0){
+      cout<<"No good columns left, option chosen: " << input+1 << endl;
       return input;
     }
   }
