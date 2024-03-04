@@ -134,7 +134,7 @@ int main(int, char**)
             g_d3dpp.BackBufferWidth = g_ResizeWidth;
             g_d3dpp.BackBufferHeight = g_ResizeHeight;
             g_ResizeWidth = g_ResizeHeight = 0;
-            ResetDevice();
+            ResetDevice();          
         }
 
         ImGui_ImplDX9_NewFrame();
@@ -228,28 +228,31 @@ int main(int, char**)
         
         
 
+            if (player==2){
+                usercol=autoplayer(grid, numrows, numcols, 3)+1;
+                row=addtocolumn(grid,usercol-1,numrows,player);
                 
-        if (player==2){
-            usercol=autoplayer(grid, numrows, numcols, 3)+1;
-            row=addtocolumn(grid,usercol-1,numrows,player);
-            
-            
-        } else if (usercol!=-1 && validcolumn(numrows,numcols,grid,usercol)){
-            row=addtocolumn(grid,usercol-1,numrows,player);
-
                 
-        } else {
-            usercol=-1;
-        }
+            } else if (usercol!=-1 && validcolumn(numrows,numcols,grid,usercol)){
+                row=addtocolumn(grid,usercol-1,numrows,player);
+
+                    
+            } else {
+                usercol=-1;
+            }
 
 
-        if (usercol>=0){
-            winner=fourinaline(grid, row, usercol-1, player,numrows,numcols);
+            if (usercol>=0){
+                winner=fourinaline(grid, row, usercol-1, player,numrows,numcols);
 
-            numtogo++;
-            if (player==1) {player=2;} else {player=1;printGrid(grid,numrows,numcols,numtogo/2);}
+                numtogo++;
+                if (player==1) {player=2;} else {player=1;printGrid(grid,numrows,numcols,numtogo/2);}
 
-        }
+            }
+
+            if (numtogo == 42){
+                winner = true;
+            }
                 
 
         
@@ -371,3 +374,4 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     return ::DefWindowProcW(hWnd, msg, wParam, lParam);
 }
+
