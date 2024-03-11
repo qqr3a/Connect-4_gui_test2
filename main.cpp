@@ -4,6 +4,7 @@
 #include <d3d9.h>
 #include <tchar.h>
 #include <iostream>
+#include <fstream>
 #include <conio.h> 
 #include "include\\game.h"
 #include "include\\auto.h"
@@ -151,7 +152,7 @@ int main(int, char**)
             if (ImGui::Begin("Connect4",NULL,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoTitleBar)){
                 ImGui::SetCursorPos(ImVec2(710,510));
 
-                if (ImGui::Button("Start",ImVec2(500,100))){
+                if (ImGui::Button("Start",ImVec2(500,100)) || ImGui::IsKeyPressed(ImGuiKey_Enter) || ImGui::IsKeyPressed(ImGuiKey_Space)){
                     start = false;
                     done = false;
                     for (int column=0;column<7;column++){
@@ -186,48 +187,49 @@ int main(int, char**)
             
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("1",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("1",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_1)){
                 usercol = 1;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("2",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("2",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_2)){
                 usercol = 2;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("3",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("3",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_3)){
                 usercol = 3;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("4",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("4",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_4)){
                 usercol = 4;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("5",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("5",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_5)){
                 usercol = 5;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("6",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("6",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_6)){
                 usercol = 6;
             }
 
             ImGui::SetCursorPos(ImVec2(buttonposx,buttonposy));
             buttonposx+=gapspacebutton;
-            if (ImGui::Button("7",ImVec2(buttonwidth,buttonhight))){
+            if (ImGui::Button("7",ImVec2(buttonwidth,buttonhight)) || ImGui::IsKeyPressed(ImGuiKey_7)){
                 usercol = 7;
             }
         
         
 
+                    
             if (player==2){
                 usercol=autoplayer(grid, numrows, numcols, 3)+1;
                 row=addtocolumn(grid,usercol-1,numrows,player);
@@ -265,10 +267,11 @@ int main(int, char**)
                         DrawCell(row,column,grid[row][column]);
                     }
                 }
+                std::ofstream gamedata("filename.txt");gamedata << std::to_string(3-player);
                 ImGui::SetWindowFontScale(2.1);
                 ImGui::SetCursorPos(ImVec2(735,925));
 
-                if (ImGui::Button("Play again",ImVec2(450,70))){
+                if (ImGui::Button("Play again",ImVec2(450,70)) || ImGui::IsKeyPressed(ImGuiKey_Enter) || ImGui::IsKeyPressed(ImGuiKey_Space)){
                     start=true;
                 }
                 
