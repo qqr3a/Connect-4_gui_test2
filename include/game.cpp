@@ -21,7 +21,7 @@ bool fourinaline(int grid[6][7], int row, int column, int player, int numrows, i
     int direction[][2] = {{1, 0} , {1, 1} , {0, 1} , {1, -1}};
     for (const auto& dir : direction){
         int count = 0;
-        for (int step=-3;step<4;step++){
+        for (int step=-3;step<4;++step){
             int current_row = row + dir[0] * step;
             int current_col = column + dir[1] * step;
             if (0 <= current_row && current_row < numrows && 0 <= current_col && current_col < numcols){
@@ -43,7 +43,7 @@ bool fourinaline(int grid[6][7], int row, int column, int player, int numrows, i
 }
 
 int addtocolumn(int grid[6][7],int column,int numrows,int player){
-    for (int i=0;i<numrows;i++){
+    for (int i=0;i<numrows;++i){
         if (grid[i][column]==0){
             grid[i][column]=player;
             return i;

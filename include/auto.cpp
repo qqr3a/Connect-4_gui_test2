@@ -27,7 +27,7 @@ bool botfourinaline(int grid[6][7], int row_test, int column, int player, int nu
     int direction[][2] = {{1, 0},{1, 1}, {0, 1}, {1, -1}};
     for (const auto& dir : direction){
         int count = 0;
-        for (int step=-3;step<4;step++){
+        for (int step=-3;step<4;++step){
             int current_row = row_test + dir[0] * step;
             int current_col = column + dir[1] * step;
             if (0 > current_row || current_row >= numrows && 0 > current_col || current_col >= numcols){
@@ -65,7 +65,7 @@ void isMalOption(int grid[6][7] , int row , int col , int donotpick[7]){
 }
 
 int rowposition(int grid[6][7],int column,int numrows){
-    for (int i=0;i<numrows;i++){
+    for (int i=0;i<numrows;++i){
         if (grid[i][column]==0){
             return i;
         }
@@ -75,7 +75,7 @@ int rowposition(int grid[6][7],int column,int numrows){
 
 
 bool isFreeColumns(int numcols , int numrows, int grid[6][7] , int donotpick[7]){
-    for (int i=0;i<numcols;i++){
+    for (int i=0;i<numcols;++i){
         if (grid[numrows-1][i]==0 && donotpick[i]==0){
             return true;
         }
@@ -91,7 +91,7 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
     }
     int donotpick[numcols]={0};
     temp=-1;
-    for (int col=0;col<numcols;col++){
+    for (int col=0;col<numcols;++col){
         auto_row=rowposition(grid , col , numrows);
 
         if (auto_row==-1){
@@ -100,37 +100,33 @@ int autoplayer(int grid[6][7], int numrows, const int numcols, int level){
 
         grid[auto_row][col] = 2;
         if (botfourinaline(grid, auto_row, col, 2, numrows, numcols)){
-            if (randwithrange(level*5)==chosenrandom){
-                std::cout << "WOOPS"<<std::endl;
-            } else{
-                grid[auto_row][col] = 0;
-                std::cout << "WIN FOUND at ( " << col+1 << " , " << auto_row+1 << " )" <<std::endl;
-                return col;
-            }
+            grid[auto_row][col] = 0;
+            std::cout << "WIN FOUND at ( " << col+1 << " , " << auto_row+1 << " )" <<std::endl;
+            return col;
         }
+        
         
         if (temp!=-1){
             grid[auto_row][col] = 0;
             continue;
         }
+
         grid[auto_row][col] = 1;
+
         if (botfourinaline(grid, auto_row, col, 1, numrows, numcols)){
-            if (randwithrange(level*5)==chosenrandom){
-                std::cout << "WOOPS" << std::endl;
-            } else {
-                grid[auto_row][col] = 0;
-                std::cout << "BLOCKED at ( " << col+1 << " , " << auto_row+1 << " )" << std::endl;
-                temp=col;
-            }
+            std::cout << "CAN BE BLOCKED at ( " << col+1 << " , " << auto_row+1 << " )" << std::endl;
+            temp=col;
         }
+
         grid[auto_row][col] = 0;
     
     } 
     if (temp!=-1){
+        std::cout << "BLOCKED at " << temp+1 << std::endl;
         return temp;
     }
 
-    for (int col=0;col<numcols;col++){
+    for (int col=0;col<numcols;++col){
         
         auto_row=rowposition(grid , col , numrows);
         
