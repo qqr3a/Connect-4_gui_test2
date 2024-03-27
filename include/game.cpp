@@ -24,7 +24,7 @@ bool fourinaline(int grid[6][7], int row, int column, int player, int numrows, i
         for (int step=-3;step<4;++step){
             int current_row = row + dir[0] * step;
             int current_col = column + dir[1] * step;
-            if (0 <= current_row && current_row < numrows && 0 <= current_col && current_col < numcols){
+            if (0 <= current_row && current_row < numrows || 0 <= current_col && current_col < numcols){
                 if (grid[current_row][current_col] == player){
                 count += 1;
                 if (count == 4){

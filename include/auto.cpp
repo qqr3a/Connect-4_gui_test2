@@ -23,6 +23,7 @@ int FASTrandwithrange(int rangemax){
 }
 
 
+
 bool botfourinaline(int grid[6][7], int row_test, int column, int player, int numrows, int numcols){
     int direction[][2] = {{1, 0},{1, 1}, {0, 1}, {1, -1}};
     for (const auto& dir : direction){
@@ -30,7 +31,7 @@ bool botfourinaline(int grid[6][7], int row_test, int column, int player, int nu
         for (int step=-3;step<4;++step){
             int current_row = row_test + dir[0] * step;
             int current_col = column + dir[1] * step;
-            if (0 > current_row || current_row >= numrows && 0 > current_col || current_col >= numcols){
+            if (0 > current_row || current_row >= numrows || 0 > current_col || current_col >= numcols){
                 count=0;
                 continue;
             }

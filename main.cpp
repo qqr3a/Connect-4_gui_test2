@@ -248,7 +248,15 @@ int main(int, char**)
                 winner=fourinaline(grid, row, usercol-1, player,numrows,numcols);
 
                 numtogo++;
-                if (player==1) {player=2;} else {player=1;printGrid(grid,numrows,numcols,numtogo/2);}
+
+
+                if (player==2){
+                    printGrid(grid,numrows,numcols,numtogo/2);
+                }
+
+                player=3-player;
+
+                
 
             }
 
