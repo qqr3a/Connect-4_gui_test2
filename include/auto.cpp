@@ -2,8 +2,6 @@
 #include <cstdlib>
 
 
-
-
 bool only,passed;
 int col,input;
 int auto_row;
