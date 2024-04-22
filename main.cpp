@@ -10,7 +10,6 @@
 #include "include\\auto.h"
 
 
-
 static LPDIRECT3D9              g_pD3D = nullptr;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = nullptr;
 static UINT                     g_ResizeWidth = 0, g_ResizeHeight = 0;

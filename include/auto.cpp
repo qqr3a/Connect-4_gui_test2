@@ -49,6 +49,7 @@ bool botfourinaline(int grid[6][7], int row_test, int column, int player, int nu
     return false;
 }
 
+
 void isMalOption(int grid[6][7] , int row , int col , int donotpick[7]){
     row++;
 

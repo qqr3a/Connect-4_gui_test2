@@ -1,11 +1,6 @@
 #include <iostream>
 
 
-
-
-
-
-
 void printGrid(int grid[6][7],int numrows, int numcols , int round) { 
     std::cout << "Round " << round << std::endl;
     for (int i = numrows - 1; i >= 0; --i) {
